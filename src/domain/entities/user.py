@@ -2,4 +2,9 @@ from src.domain.entities.as_dict import EntityAsDict
 
 
 class User(EntityAsDict):
-    pass
+    def __init__(self, id: int, name: str, email: str, password: str, status: int):
+        self.id = id 
+        self.name = name 
+        self.email = email 
+        self.password = password
+        self.status = status 
