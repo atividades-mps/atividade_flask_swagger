@@ -9,6 +9,6 @@ class Logout:
     def execute(self, id: str):
         user = self.user_service.find_by_id(id)
         if user != None:
-            self.user_service.update(user.id, status=0)
+            self.user_service.update(id, status=0)
             return True
         return False

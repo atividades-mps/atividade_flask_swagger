@@ -12,7 +12,7 @@ class MockEventsService(EventsService):
     def create(self, user_id: str, new_event: Event) -> Event:
         if not(user_id in self.data):
             self.data[user_id] = []
-        new_event.id = uuid1()
+        new_event.id = str(uuid1())
         self.data[user_id].append(new_event)
         return new_event
 
@@ -61,16 +61,15 @@ class MockEventsService(EventsService):
                 found_event.title = title if title else found_event.title
                 found_event.datetime = datetime if datetime else found_event.datetime
                 found_event.description = description if description else found_event.description
-                found_event.status = status if status else found_event.status
+                found_event.status = status != None if status else found_event.status
                 self.data[user_id][index] = found_event
                 return found_event
 
 
     def delete_by_id(self, user_id: str, id: str) -> bool:
-        self.data[user_id] = list(
-            filter(
-                lambda event: event.id != id, 
-                self.data[user_id]
-            )
-        )
+        new_list = []
+        for event in self.data[user_id]:
+            if event.id != id:
+                new_list.append(event) 
+        self.data[user_id] = new_list
         return True
