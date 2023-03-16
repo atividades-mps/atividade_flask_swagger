@@ -1,18 +1,16 @@
-from flask import Flask
-from flask_cors import CORS
+from datetime import date
 
-from src.api.routes.events import events_blueprint
-from src.api.routes.users import users_blueprint
+import connexion
 
-app = Flask(__name__)
-CORS(app)
+app = connexion.App(__name__, specification_dir='./src/api/routes')
+app.add_api('swagger.yml')
 
 @app.route('/')
 def get():
-    return {'hello': 'cronologus'}
-
-# app.register_blueprint(users_blueprint)
-# app.register_blueprint(events_blueprint)
+    return {
+        'hello': 'cronologus',
+        'now': date.today()
+    }
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)

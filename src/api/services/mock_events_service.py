@@ -10,14 +10,14 @@ class MockEventsService(EventsService):
         self.data: dict[str, list[Event]] = {}
 
     def create(self, user_id: str, new_event: Event) -> Event:
-        if self.data[user_id] is None:
+        if not(user_id in self.data):
             self.data[user_id] = []
         new_event.id = uuid1()
         self.data[user_id].append(new_event)
         return new_event
 
     def fetch_all(self, user_id: str)-> list[Event]:
-        if self.data[user_id] is None:
+        if not(user_id in self.data):
             self.data[user_id] = []
         return self.data[user_id]
 
@@ -25,7 +25,7 @@ class MockEventsService(EventsService):
             self, 
             user_id: str, 
             datetime: datetime) -> list[Event]:
-        if self.data[user_id] is None:
+        if not(user_id in self.data):
             self.data[user_id] = []
         filtered_list = list(
             filter(lambda event: event.datetime.date() == datetime.date(), self.data[user_id])
@@ -37,7 +37,7 @@ class MockEventsService(EventsService):
             user_id: str, 
             start_date: datetime, 
             end_date: datetime) -> list[Event]:
-        if self.data[user_id] is None:
+        if not(user_id in self.data):
             self.data[user_id] = []
         filtered_list = list(
             filter(

@@ -1,7 +1,7 @@
 from src.domain.ports.users_service import UsersService
 
 
-class FetchAllUsers:
+class FetchAll:
     def __init__(self, user_service: UsersService):
         self.users_service = user_service
 
