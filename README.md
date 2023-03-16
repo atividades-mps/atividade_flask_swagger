@@ -95,8 +95,7 @@
 {
   "name": "string",
   "email": "string",
-  "password": "string",
-  "status": "number"
+  "password": "string"
 }
 ```
 
@@ -204,8 +203,7 @@
 {
   "title": "string",
   "datetime": "datetime",
-  "description": "string",
-  "status": "number"
+  "description": "string"
 }
 ```
 
